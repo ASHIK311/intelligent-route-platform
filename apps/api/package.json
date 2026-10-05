@@ -1,0 +1,34 @@
+{
+  "name": "@intelligent-route/api",
+  "version": "1.0.0",
+  "main": "dist/app.js",
+  "types": "dist/app.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "dependencies": {
+    "@intelligent-route/shared-types": "^1.0.0",
+    "@intelligent-route/routing-engine": "^1.0.0",
+    "@intelligent-route/optimization-engine": "^1.0.0",
+    "@intelligent-route/prediction-client": "^1.0.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.14",
+    "tsx": "^4.23.15",
+    "typescript": "^5.8.2"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@intelligent-route/optimization-engine",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "dependencies": {
+    "@intelligent-route/shared-types": "^1.0.0",
+    "@intelligent-route/routing-engine": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.2"
+  }
+}

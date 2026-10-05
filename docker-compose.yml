@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgis/postgis:15-3.3-alpine
+    container_name: neuro_route_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: route_platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+    networks:
+      - route_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: neuro_route_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - route_network
+
+  api:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.api
+    container_name: neuro_route_api
+    environment:
+      PORT: 4000
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:postgrespassword@postgres:5432/route_platform
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: super-secret-intelligent-route-jwt-token-key-2026
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - route_network
+
+  web:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/Dockerfile.web
+    container_name: neuro_route_web
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - route_network
+
+volumes:
+  postgres_data:
+
+networks:
+  route_network:
+    driver: bridge
