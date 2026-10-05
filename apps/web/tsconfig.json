@@ -14,7 +14,13 @@
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "types": ["vite/client"],
+    "paths": {
+      "@intelligent-route/shared-types": ["./src/types/shared-types.ts"],
+      "@intelligent-route/shared-types/*": ["./src/types/*"]
+    }
   },
   "include": ["src"]
 }
