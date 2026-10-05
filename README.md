@@ -6,6 +6,7 @@
   <strong>Next-Generation Multi-Objective Urban Navigation, Machine Learning Traffic Forecasting & Personal Route Brain</strong>
 </p>
 
+[![Live Demo](https://img.shields.io/badge/Demo-Live%20on%20Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://intelligent-route-platform-chi.vercel.app/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-22%2B-5FA04E?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
@@ -17,12 +18,19 @@
 [![Tests Passing](https://img.shields.io/badge/Tests-29%20Passed-brightgreen?style=for-the-badge&logo=checkmarx&logoColor=white)](./TESTING.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-F7DF1E?style=for-the-badge&logo=open-source-initiative&logoColor=black)](./LICENSE)
 
+<br/>
+
+<p align="center">
+  🌐 <strong>Live Application URL:</strong> <a href="https://intelligent-route-platform-chi.vercel.app/"><strong>https://intelligent-route-platform-chi.vercel.app/</strong></a>
+</p>
+
 ---
 
 ### 🌐 Beyond Basic Distance Calculators:
 > *"Which route is expected to provide the best overall outcome for this specific user at this exact time under evolving traffic conditions?"*
 
-[✨ Key Features](#-key-features) • [🏛 System Architecture](#-system-architecture) • [⚡ Routing Algorithms & Math](#-routing-algorithms--mathematical-formulation) • [🧠 Machine Learning Engine](#-machine-learning-travel-time-engine) • [🔮 Personal Route Brain](#-personal-route-brain) • [🖥️ Web Dashboard](#%EF%B8%8F-interactive-web-dashboard) • [📊 Benchmarks](#-empirical-benchmarks) • [🚀 Quick Start](#-quick-start) • [🔌 API Reference](#-rest--websocket-api-reference) • [📚 Technical Docs](#-technical-documentation)
+[🚀 Live Demo](https://intelligent-route-platform-chi.vercel.app/) • [✨ Key Features](#-key-features) • [🏛 System Architecture](#-system-architecture) • [⚡ Routing Algorithms & Math](#-routing-algorithms--mathematical-formulation) • [🧠 Machine Learning Engine](#-machine-learning-travel-time-engine) • [🔮 Personal Route Brain](#-personal-route-brain) • [🖥️ Web Dashboard](#%EF%B8%8F-interactive-web-dashboard) • [📊 Benchmarks](#-empirical-benchmarks) • [🚀 Quick Start](#-quick-start) • [🔌 API Reference](#-rest--websocket-api-reference) • [📚 Technical Docs](#-technical-documentation)
+
 
 ---
 
