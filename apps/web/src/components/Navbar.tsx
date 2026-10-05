@@ -1,6 +1,8 @@
 import React from 'react';
 import { Compass, Brain, BarChart3, Shield, Activity, User, Sparkles } from 'lucide-react';
 
+import { AnimatedLogo } from './AnimatedLogo.js';
+
 export type AppTab = 'routing' | 'brain' | 'analytics' | 'admin';
 
 interface NavbarProps {
@@ -23,23 +25,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Brand Logo */}
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-            <Compass className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <div className="flex items-center space-x-2">
-              <span className="font-bold text-lg text-white tracking-tight">NeuroRoute</span>
-              <span className="px-1.5 py-0.5 text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded">
-                INTELLIGENT 2.0
-              </span>
-            </div>
-            <p className="text-xs text-slate-400 hidden sm:block">
-              Adaptive Route Optimization & Personal Intelligence
-            </p>
-          </div>
-        </div>
+        {/* Animated Brand Logo */}
+        <AnimatedLogo />
 
         {/* Navigation Tabs */}
         <nav className="flex space-x-1 sm:space-x-2">
