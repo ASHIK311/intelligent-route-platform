@@ -56,7 +56,7 @@ npm run dev:web
 ```
 
 Access the interactive web application at:
-**[http://localhost:5173](http://localhost:5173)**
+**[http://localhost:3000](http://localhost:3000)** (or [http://localhost:5173](http://localhost:5173) if configured)
 
 API Health endpoint:
 **[http://localhost:4000/api/v1/system/health](http://localhost:4000/api/v1/system/health)**

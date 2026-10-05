@@ -4,38 +4,43 @@
 
 As specified in SRS Section 68, the platform is structured around clean modular boundaries where routing, machine learning prediction, personalization, and multi-objective optimization operate as decoupled subsystems:
 
-```text
-                    ┌───────────────────────────────┐
-                    │          WEB CLIENT           │
-                    │   React 18 + Vite + Tailwind   │
-                    └───────────────┬───────────────┘
-                                    │
-                              REST / WebSocket
-                                    │
-                    ┌───────────────▼───────────────┐
-                    │          NODE.JS API          │
-                    │         Express Server        │
-                    └───────────────┬───────────────┘
-                                    │
-       ┌────────────────────────────┼────────────────────────────┐
-       │                            │                            │
-       ▼                            ▼                            ▼
- Routing Engine               Prediction Engine            Personal Brain
- (A*, Dijkstra,               (Gradient Boosted           (Habit Detection,
-  Bidirectional)               Decision Trees)             Affinity Scoring)
-       │                            │                            │
-       └────────────────────────────┼────────────────────────────┘
-                                    │
-                         ┌──────────▼──────────┐
-                         │ Optimization Engine │
-                         │ (Multi-Objective    │
-                         │  Scoring & Ranking) │
-                         └──────────┬──────────┘
-                                    │
-                         ┌──────────▼──────────┐
-                         │  PostgreSQL/PostGIS │
-                         │     + Cache Layer   │
-                         └─────────────────────┘
+```mermaid
+graph TD
+    classDef client fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef server fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef core fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+    classDef storage fill:#3b0764,stroke:#c084fc,stroke-width:2px,color:#f8fafc;
+
+    subgraph Presentation_Layer [" 🌐 Frontend Presentation "]
+        UI["React 18 + Vite + TailwindCSS Web Client<br/>• 100-Node Vector Map Canvas<br/>• Live Journey Tracker & Radar UI"]:::client
+    end
+
+    subgraph API_Gateway [" 🔌 API Gateway & Transport "]
+        API["Node.js Express + WebSocket Server<br/>• REST API v1 • Real-time Congestion Telemetry"]:::server
+    end
+
+    subgraph Intelligence_Subsystems [" 🧠 Core Computational Engines "]
+        RE["@intelligent-route/routing-engine<br/>• A* Search (Admissible Heuristic)<br/>• Dijkstra Exact Baseline<br/>• Bidirectional Dijkstra<br/>• Penalty Deflection Alternatives"]:::core
+        ML["@intelligent-route/prediction-client<br/>• Gradient Boosted Decision Trees<br/>• Rush-Hour Cyclical Sin/Cos Features<br/>• 4-Tier Resilient Fallback Cascade"]:::core
+        PB["Personal Route Brain Service<br/>• Habit & Routine Corridor Discovery<br/>• Time / Cost Sensitivity Learning<br/>• Soft Affinity Bonus Injection"]:::core
+        OE["@intelligent-route/optimization-engine<br/>• Multi-Objective Dynamic Cost Function<br/>• Hard Constraint Enforcement<br/>• Calibrated Route Confidence (0.45-0.98)<br/>• Human-Readable Explanation Engine"]:::core
+    end
+
+    subgraph Data_Storage [" 🗄️ Persistence & Infrastructure "]
+        DB["PostgreSQL 15 + PostGIS<br/>• Spatial Graph (100 Nodes, 530 Edges)<br/>• Journey History & Feedback Logs"]:::storage
+        CACHE["Redis In-Memory Cache<br/>• Hot Path Graph Traversal Cache"]:::storage
+    end
+
+    UI <-->|"REST (JSON) / WebSocket (Telemetry)"| API
+    API --> PB
+    API --> ML
+    API --> RE
+    RE --> OE
+    ML --> OE
+    PB --> OE
+    OE --> API
+    API <--> DB
+    API <--> CACHE
 ```
 
 ---
@@ -73,37 +78,32 @@ As specified in SRS Section 68, the platform is structured around clean modular 
 
 ## 3. Request Flow Diagram
 
-```text
-User initiates search in Web Client
-             │
-             ▼
-POST /api/v1/routes/search
-             │
-             ▼
-RoutesController -> RecommendationService
-             │
-      ┌──────┴─────────────────────────────────┐
-      │                                        │
-Query Personal Brain                     Enrich Graph Edges
-for User Affinities                     with ML Travel Time Predictions
-      │                                        │
-      └──────┬─────────────────────────────────┘
-             ▼
-RoutingEngine: A* / Bidirectional Search
-             │
-             ▼
-OptimizationEngine:
-  1. Enforce Hard Constraints (Budget, Deadline, Road Avoidance)
-  2. Compute Multi-Objective Dynamic Score
-  3. Calculate Calibrated Confidence (e.g. 94%)
-  4. Generate Human-Readable Explanation & Tradeoffs
-             │
-             ▼
-Store Search & Routes in Repository
-             │
-             ▼
-Return RouteSearchResult JSON to Client
-             │
-             ▼
-Web UI renders Glowing Recommended Route + Alternatives + Explanations
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as 👤 Commuter
+    participant UI as 🌐 Web Dashboard (React 18)
+    participant API as 🔌 Node.js API Gateway
+    participant PB as 🧠 Personal Route Brain
+    participant ML as 🔮 ML Prediction Engine
+    participant RE as ⚡ Routing Engine (A*/Bidir)
+    participant OE as 🎯 Optimization Engine
+    participant DB as 🗄️ PostGIS / DB Store
+
+    User->>UI: Select Origin & Destination
+    UI->>API: POST /api/v1/routes/search
+    API->>PB: Query habit corridors & user sensitivities
+    PB-->>API: User profile & affinity bonuses
+    API->>ML: Predict edge travel times & congestion momentum
+    ML-->>API: Multipliers, delay probabilities & confidence
+    API->>RE: Execute A* / Bidirectional Dijkstra search
+    RE-->>API: Optimal path + Diverse alternative candidates
+    API->>OE: Apply Hard Constraints (Budget, Deadline, Avoid Tolls)
+    OE->>OE: Compute Multi-Objective Dynamic Scores
+    OE->>OE: Calibrate Confidence (0.45 - 0.98) & Generate Explanations
+    OE-->>API: Ranked Route Package
+    API->>DB: Persist Search Query & Route Telemetry
+    API-->>UI: 200 OK (Recommended Route + Alternatives)
+    UI->>User: Render Glowing Polylines, Comparison Cards & Trade-offs
 ```
+
